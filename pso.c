@@ -24,7 +24,7 @@ int main (){
     const int c1 = 2;         //constante positiva
     const int c2 = 2;
     const int maxite = 100000;     //total de iterações
-    const int maxrun = 10;     //total de vezes que o programa vai rodar
+    const int maxrun = 5;     //total de vezes que o programa vai rodar
 
     int i = 0;
     int j = 0;
