@@ -42,7 +42,9 @@ int main (){
     double f[N];         //valores de aptidao (fitness) corrente
 
     int x_min0, x_min;    //índice dos valores mínimos de fitness
-    double fmin0, fmin;
+    double fmin0, fmin;   //minimo guardado e minimo corrente
+    //double ffmin[maxite][maxrun], fvalue, fff[maxrun];
+    //int ffite[maxrun];
 
     double aux[2];   //aux[0] guarda o valor mínimo e aux[1] guarda o índice do valor mínimo
 
@@ -54,7 +56,9 @@ int main (){
             for(j=0;j<M;j++){
                 //o máximo que a função rand retorna é 32767 e (double) pq senao ele daria 0 ou 1
                 x_ini[i][j] = lim_inf[j] + (((double)rand()/32767)*(lim_sup[j] - lim_inf[j]));
+                //printf("\n%f\t", x_ini[i][j]);
             }
+            //printf("\n");
         }
         
         for(i=0;i<N;i++){
@@ -116,11 +120,13 @@ int main (){
             min(f0,aux);
             fmin = aux[0];
             x_min = aux[1];
+            //ffmin[iteracao][run] = fmin;
+            //ffite[run] = iteracao;
 
             if(fmin<fmin0){
                 for(j=0;j<M;j++){
                     gbest[j] = pbest[x_min][j];
-                    //printf(" %f ", gbest[j]);
+                    printf(" %f ", gbest[j]);
                 }
                 printf("\n");
                 fmin0 = fmin;
@@ -136,8 +142,8 @@ int main (){
         }
     }
 
-    printf("\n\nMelhor particula: %f, %f, %f.\tFitness: %f", gbest[0], gbest[1], gbest[2], fmin);
-    printf("\nTempo total de execucao = %f s", (clock() - tempo) / (double)CLOCKS_PER_SEC);
+    printf("\n\nMelhor particula: %f, %f, %f.\nFitness: %f", gbest[0], gbest[1], gbest[2], fmin);
+    printf("\nTempo total de execucao = %f s\n", (clock() - tempo) / (double)CLOCKS_PER_SEC);
 }
 
 void ofun(double x[N][M], double of[]){
