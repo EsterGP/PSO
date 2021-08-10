@@ -52,14 +52,14 @@ int main (){
 			for(j=0;j<M;j++){
 				Echo("formando a populacao inicial");
 				//o máximo que a função rand retorna é 32767 e (double) pq senao ele daria 0 ou 1
-				//x_ini[i][j] = lim_inf[j] + ((double)(rand(10,0,32767)/32767)*(lim_sup[j] - lim_inf[j]));
+				x_ini[i][j] = lim_inf[j] + (rand(32767,0,1))*(lim_sup[j] - lim_inf[j]);
 			}
 		}
-        	Echo("Valores iniciais");
+/*        	Echo("Valores iniciais");
         	for(i=0;i<N;i++){
             		for(j=0;j<M;j++){
                 		x[i][j] = x_ini[i][j];
-				v[i][j] = 0.1*x_ini[i][j];
+				v[i][j] = (int)(0.1*x_ini[i][j]);
             		}
         	}
 
@@ -127,19 +127,21 @@ int main (){
             
             		iteracao++;
 		}
+*/
 	}
-    
+/*	  
     	for(k=0;k<M;k++)
         	msg.msg[i] = gbest[i];
         
-    	msg.length = M;
-    
-    	Send(&msg,resultado);
-
+	msg.length = M;
+	
+    	Echo("Melhor partícula: ");
+	Echo(itoa(msg.msg[0])); Echo(itoa(msg.msg[1])); Echo(itoa(msg.msg[2]));
     	Echo("Fitness: ");
     	Echo(itoa(fmin));
     	Echo("Tempo total de execução: ");
     	Echo(GetTick());
+*/
 }
 
 void ofun(int x[N][M], int of[]){
