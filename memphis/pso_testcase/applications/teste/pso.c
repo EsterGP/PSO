@@ -14,8 +14,8 @@ int main (){
 	
 	int lim_inf[M] = {0, 0, 0};
 	int lim_sup[M] = {10, 10, 10};
-	int wmin = 0;   //coeficiente de inércia mínimo
-	int wmax = 1;   //coeficiente de inércia máximo
+//	int wmin = 0;   //coeficiente de inércia mínimo
+//	int wmax = 1;   //coeficiente de inércia máximo
 	int w = 0;
 	
 	int c1 = 2;         //constante positiva
@@ -48,18 +48,23 @@ int main (){
 	for(run=1;run<=maxrun;run++){
 		Echo("Comeco da run ");
 		for(i=0;i<N;i++){
-			Echo("Primeiro for");
+			//Echo("Primeiro for");
 			for(j=0;j<M;j++){
-				Echo("formando a populacao inicial");
+				//Echo("formando a populacao inicial");
 				//o máximo que a função rand retorna é 32767 e (double) pq senao ele daria 0 ou 1
 				x_ini[i][j] = lim_inf[j] + (rand(32767,0,1))*(lim_sup[j] - lim_inf[j]);
 			}
 		}
-/*        	Echo("Valores iniciais");
+        	Echo("Valores iniciais");
         	for(i=0;i<N;i++){
             		for(j=0;j<M;j++){
                 		x[i][j] = x_ini[i][j];
-				v[i][j] = (int)(0.1*x_ini[i][j]);
+				v[i][j] = 1;
+
+				Echo("valor: ");
+				Echo(itoa(x[i][j]));
+				Echo("velocidade: ");
+				Echo(itoa(v[i][j]));
             		}
         	}
 
@@ -80,12 +85,12 @@ int main (){
 		iteracao = 1;
 
 		while(iteracao<=maxite){
-			w = wmax - (wmax - wmin)*(iteracao/maxite);  //calculando o coeficiente de inércia
+			//w = wmax - (wmax - wmin)*(iteracao/maxite);  //calculando o coeficiente de inércia
             
 			//atualizando as velocidades
 			for(i=0;i<N;i++)
 				for(j=0;j<M;j++)
-					v[i][j] = w*v[i][j] + c1*(rand(t,0,1))*(pbest[i][j]-x[i][j]) + c2*(rand(t,0,1))*(gbest[j]-x[i][j]);
+					v[i][j] = w*v[i][j] + c1*(rand(32767,0,1))*(pbest[i][j]-x[i][j]) + c2*(rand(32767,0,1))*(gbest[j]-x[i][j]);
             
 			//atualizando a posição das partículas
 			for(i=0;i<N;i++)
@@ -127,11 +132,11 @@ int main (){
             
             		iteracao++;
 		}
-*/
+
 	}
 /*	  
     	for(k=0;k<M;k++)
-        	msg.msg[i] = gbest[i];
+        	msg.msg[k] = gbest[k];
         
 	msg.length = M;
 	
@@ -142,6 +147,14 @@ int main (){
     	Echo("Tempo total de execução: ");
     	Echo(GetTick());
 */
+	Echo("Melhor partícula: ");
+	for(k=0;k<M;k++)
+		Echo(itoa(gbest[k]));
+    	Echo("Fitness: ");
+    	Echo(itoa(fmin));
+    	Echo("Tempo total de execução: ");
+    	Echo(itoa(GetTick()));
+
 }
 
 void ofun(int x[N][M], int of[]){
