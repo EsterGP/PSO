@@ -142,7 +142,7 @@ int main (){
     }
     
     for(k=0;k<M;k++)
-        msg.msg[i] = gbest[i];
+        msg.msg[k] = gbest[k];
         
     msg.length = M;
     
