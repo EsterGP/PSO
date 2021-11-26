@@ -8,7 +8,6 @@ Message msg;
 
 void ofun(int x[N][M], int of[]); 
 void min(int f[], int aux[]);
-//int pow(int x, int y);
 
 int main (){
 	int t;
@@ -43,8 +42,6 @@ int main (){
 	int ffite[maxrun];
 
 	int aux[2];   //aux[0] guarda o valor mínimo e aux[1] guarda o índice do valor mínimo
-	
-	//int velocidade_aux;
 	
 	for(run=1;run<=maxrun;run++){
 		for(i=0;i<N;i++){
@@ -148,16 +145,6 @@ int main (){
     	Echo(itoa(fmin));
     	Echo("Tempo total de execucao: ");
     	Echo(itoa(GetTick()));
-
-	Echo("Melhor particula: ");
-	for(k=0;k<M;k++)
-		Echo(itoa(gbest[k]));
-	
-    	Echo("Fitness: ");
-    	Echo(itoa(fmin));
-    	Echo("Tempo total de execucao: ");
-    	Echo(itoa(GetTick()));
-
 }
 
 void ofun(int x[N][M], int of[]){
