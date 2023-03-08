@@ -12,11 +12,11 @@ int main (){
 	
 	msg.length = MSG_SIZE;
 	
-	int N, M, XMin, XMax, YMin, YMax, w, c, i;
+	int N, M, XMin, XMax, YMin, YMax, w, c, i, j;
 
 	//Recebe parâmetros do mestre
-	Receive (&msg, pso_master);
-	Echo ("Mensagem recebida pelo escravo 2");
+	Receive (&msg, pso_master_8);
+	Echo ("Mensagem recebida pelo escravo 1");
 	for (i = 0; i < 8; i++){
 		Echo (itoa (msg.msg[i]));
 	}
@@ -35,10 +35,6 @@ int main (){
 	
 	int maxite = 20;   //total de iterações
 	int maxrun = 1;     //total de vezes que o programa vai rodar
-
-	//int i = 0; linha 15
-	int j = 0;
-	//int k = 0;
 	int run = 1;
 	int iteracao = 0;
 
@@ -153,7 +149,7 @@ int main (){
 	msg.msg[0] = fmin;
 	msg.msg[1] = gbest[0];
 	msg.msg[2] = gbest[1];
-	Send (&msg, pso_master);
+	Send (&msg, pso_master_8);
 }
 
 void ofun(int x[][2], int of[], int N){

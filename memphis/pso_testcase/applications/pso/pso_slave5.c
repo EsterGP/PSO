@@ -15,8 +15,8 @@ int main (){
 	int N, M, XMin, XMax, YMin, YMax, w, c, i, j;
 
 	//Recebe parâmetros do mestre
-	Receive (&msg, pso_master);
-	Echo ("Mensagem recebida pelo escravo 5");
+	Receive (&msg, pso_master_8);
+	Echo ("Mensagem recebida pelo escravo 1");
 	for (i = 0; i < 8; i++){
 		Echo (itoa (msg.msg[i]));
 	}
@@ -149,7 +149,7 @@ int main (){
 	msg.msg[0] = fmin;
 	msg.msg[1] = gbest[0];
 	msg.msg[2] = gbest[1];
-	Send (&msg, pso_master);
+	Send (&msg, pso_master_8);
 }
 
 void ofun(int x[][2], int of[], int N){
