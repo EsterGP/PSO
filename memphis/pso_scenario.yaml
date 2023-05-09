@@ -1,4 +1,5 @@
 apps:
-  - name: pso
+  - name: rosenbrock_serial
+  - name: pso_4
     cluster: 0
     start_time_ms: 0
