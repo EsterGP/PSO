@@ -16,17 +16,17 @@ int main (){
 	
 	//para o paralelismo
 	int M = 2; //numero de variaveis na função objetivo
-    	int N = 500; //tamanho da população para cada servo
+    	int N = 100; //tamanho da população para cada servo
     	
     	int w = 1;
 	int c = 2;	   //constante positiva (c1 e c2)
 	int gbest[M];     //melhor global
 	int i, j;
     	
-    	int lim_inf[] = {0, 10};
-	int lim_sup[] = {0, 10};
+    	int lim_inf = 0;
+	int lim_sup = 100;
 	
-	int maxite = 50;   //total de iterações
+	int maxite = 100;   //total de iterações
 	int maxrun = 1;     //total de vezes que o programa vai rodar
 	int run = 1;
 	int iteracao = 0;
@@ -46,9 +46,11 @@ int main (){
 	int aux[2];   //aux[0] guarda o valor mínimo e aux[1] guarda o índice do valor mínimo
 	
 	for(run=1;run<=maxrun;run++){
+	
+		//inicializando os valores da posição e da velocidade
 		for(i=0;i<N;i++){
-			x[i][0] = (rand(GetTick(),0,10));
-			x[i][1] = (rand(GetTick(),0,10));
+			x[i][0] = (rand(GetTick(),lim_inf,lim_sup));
+			x[i][1] = (rand(GetTick(),lim_inf,lim_sup));
 			v[i][0] = 1;
 			v[i][1] = 1;
 		}
@@ -66,31 +68,38 @@ int main (){
 				pbest[i][j] = x[i][j];
 			}
 		}
-		
+		Echo("Gbest: ");
 		for(j=0;j<M;j++){
 			gbest[j] = x[x_min][j];
+                    	Echo(itoa(gbest[j]));
 		}
 
 		iteracao = 1;
 
 		while(iteracao<=maxite){            
 			//atualizando as velocidades
+			Echo("Velocidade: ");
 			for(i=0;i<N;i++){
 				for(j=0;j<M;j++){
-					v[i][j] = w*v[i][j] + (c*(rand(GetTick(),0,2))*(pbest[i][j]-x[i][j]) + c*(rand(GetTick(),0,2))*(gbest[j]-x[i][j]))%10;
+					v[i][j] = w*v[i][j] + (c*(rand(GetTick(),0,2))*(pbest[i][j]-x[i][j]) + c*(rand(GetTick(),0,2))*(gbest[j]-x[i][j]))%100;
+					Echo(itoa(v[i][j]));
 				}
 			}
             
 			//atualizando a posição das partículas
+			Echo("Posicao: ");
 			for(i=0;i<N;i++)
-				for(j=0;j<M;j++)
+				for(j=0;j<M;j++){
 					x[i][j] = x[i][j] + v[i][j];
+					Echo(itoa(x[i][j]));
+				}
 
 			//verificando limites
 			for(i=0;i<N;i++){
 				for(j=0;j<M;j++){
-					if(x[i][j] < lim_inf[j]) x[i][j] = lim_inf[j];
-					else if(x[i][j] > lim_sup[j]) x[i][j] = lim_sup[j];
+					if(x[i][j] < lim_inf) x[i][j] = lim_inf;
+					else if(x[i][j] > lim_sup) x[i][j] = lim_sup;
+					Echo("Nova posicao: "); Echo(itoa(x[i][j]));
                 		}
             		}
 
@@ -113,9 +122,9 @@ int main (){
 
 			Echo("iteracao: ");
 			Echo(itoa(iteracao));
-			Echo("Gbest: ");
 
             		if(fmin<fmin0){
+            			Echo("Gbest: ");
                 		for(j=0;j<M;j++){
                     			gbest[j] = pbest[x_min][j];
                     			Echo(itoa(gbest[j]));
@@ -134,22 +143,7 @@ int main (){
     	Echo("Fitness: ");
     	Echo(itoa(fmin));
     	Echo("Tempo total de execucao: ");
-    	Echo(itoa(GetTick()));
-        
-        //imprimindo resultados
-        Echo("Resultados do servo 4");
-        Echo("Melhor resultado da funcao: ");
-        Echo(itoa(fmin));
-        Echo("Melhor solucao: ");
-        Echo("X1 = ");
-        Echo(itoa(gbest[0]));
-        Echo("X2 = ");
-        Echo(itoa(gbest[1])); 
-        
-        
-        Echo("Fim do PSO: ");
-        Echo(itoa(GetTick()));
-        
+    	Echo(itoa(GetTick()));        
 }
 
 void ofun(int x[][2], int of[], int N){
