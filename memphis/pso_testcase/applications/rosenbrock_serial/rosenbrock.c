@@ -16,14 +16,14 @@ int main (){
 	
 	//para o paralelismo
 	int M = 2; //numero de variaveis na função objetivo
-    int N = 200; //tamanho da população para cada servo
+    	int N = 200; //tamanho da população para cada servo
     	
-    int w = 1;
+    	int w = 1;
 	int c = 2;	   //constante positiva (c1 e c2)
 	int gbest[M];     //melhor global
 	int i, j;
     	
-    int lim_inf = 0;
+    	int lim_inf = 0;
 	int lim_sup = 100;
 	
 	int maxite = 200;   //total de iterações
