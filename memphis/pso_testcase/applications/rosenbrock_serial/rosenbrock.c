@@ -16,17 +16,17 @@ int main (){
 	
 	//para o paralelismo
 	int M = 2; //numero de variaveis na função objetivo
-    	int N = 100; //tamanho da população para cada servo
+    int N = 200; //tamanho da população para cada servo
     	
-    	int w = 1;
+    int w = 1;
 	int c = 2;	   //constante positiva (c1 e c2)
 	int gbest[M];     //melhor global
 	int i, j;
     	
-    	int lim_inf = 0;
+    int lim_inf = 0;
 	int lim_sup = 100;
 	
-	int maxite = 100;   //total de iterações
+	int maxite = 200;   //total de iterações
 	int maxrun = 1;     //total de vezes que o programa vai rodar
 	int run = 1;
 	int iteracao = 0;
@@ -78,20 +78,20 @@ int main (){
 
 		while(iteracao<=maxite){            
 			//atualizando as velocidades
-			Echo("Velocidade: ");
+			//Echo("Velocidade: ");
 			for(i=0;i<N;i++){
 				for(j=0;j<M;j++){
 					v[i][j] = w*v[i][j] + (c*(rand(GetTick(),0,2))*(pbest[i][j]-x[i][j]) + c*(rand(GetTick(),0,2))*(gbest[j]-x[i][j]))%100;
-					Echo(itoa(v[i][j]));
+					//Echo(itoa(v[i][j]));
 				}
 			}
             
 			//atualizando a posição das partículas
-			Echo("Posicao: ");
+			//Echo("Posicao: ");
 			for(i=0;i<N;i++)
 				for(j=0;j<M;j++){
 					x[i][j] = x[i][j] + v[i][j];
-					Echo(itoa(x[i][j]));
+					//Echo(itoa(x[i][j]));
 				}
 
 			//verificando limites
@@ -99,7 +99,7 @@ int main (){
 				for(j=0;j<M;j++){
 					if(x[i][j] < lim_inf) x[i][j] = lim_inf;
 					else if(x[i][j] > lim_sup) x[i][j] = lim_sup;
-					Echo("Nova posicao: "); Echo(itoa(x[i][j]));
+					//Echo("Nova posicao: "); Echo(itoa(x[i][j]));
                 		}
             		}
 
@@ -129,6 +129,8 @@ int main (){
                     			gbest[j] = pbest[x_min][j];
                     			Echo(itoa(gbest[j]));
                 		}
+                		Echo("Fitness: ");
+				Echo(itoa(fmin));
                 	fmin0 = fmin;
             		}
             
