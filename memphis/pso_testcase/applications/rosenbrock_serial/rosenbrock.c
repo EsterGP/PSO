@@ -16,17 +16,17 @@ int main (){
 	
 	//para o paralelismo
 	int M = 2; //numero de variaveis na função objetivo
-    	int N = 200; //tamanho da população para cada servo
+    	int N = 150; //tamanho da população para cada servo
     	
     	int w = 1;
 	int c = 2;	   //constante positiva (c1 e c2)
 	int gbest[M];     //melhor global
 	int i, j;
     	
-    	int lim_inf = 0;
-	int lim_sup = 100;
+    	int lim_inf = -65;
+	int lim_sup = 65;
 	
-	int maxite = 200;   //total de iterações
+	int maxite = 1000;   //total de iterações
 	int maxrun = 1;     //total de vezes que o programa vai rodar
 	int run = 1;
 	int iteracao = 0;
@@ -120,10 +120,10 @@ int main (){
 		    	ffmin[iteracao][run] = fmin;
 		    	ffite[run] = iteracao;
 
-			Echo("iteracao: ");
-			Echo(itoa(iteracao));
-
             		if(fmin<fmin0){
+				Echo("iteracao: ");
+				Echo(itoa(iteracao));
+
             			Echo("Gbest: ");
                 		for(j=0;j<M;j++){
                     			gbest[j] = pbest[x_min][j];
@@ -153,7 +153,7 @@ void ofun(int x[][2], int of[], int N){
 
     for(i=0;i<N;i++){
 	//Função objetivo (1-x)^2 + 100(y-x^2)^2
-        of[i] = (1-x[i][0])*(1-x[i][0]) + 100*((x[i][1]-((x[i][0])*(x[i][0])))*(x[i][1]-((x[i][0])*(x[i][0]))));
+        of[i] = (1-x[i][0])*(1-x[i][0]) + 100*((x[i][1]-x[i][0]*x[i][0])*(x[i][1]-x[i][0]*x[i][0]));
     }
 }
 
