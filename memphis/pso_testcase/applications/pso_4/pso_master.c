@@ -12,7 +12,7 @@ int main (){
 	
 	//para o paralelismo
 	int M = 2; //numero de variaveis na função objetivo
-    	int N = 100; //tamanho da população para cada servo
+    	int N = 150; //tamanho da população para cada servo
     	
     	int w = 1;
 	int c = 2;	   //constante positiva (c1 e c2)
@@ -21,28 +21,28 @@ int main (){
 	int i;
     	
     	//  ########### slave 1 ###########
-    	int Xmin1 = 0;
-	int Xmax1 = 50;
-	int Ymin1 = 0;
-	int Ymax1 = 50;
+    	int Xmin1 = -65;
+	int Xmax1 = -1;
+	int Ymin1 = -65;
+	int Ymax1 = -1;
 	
 	//  ########### slave 2 ###########
-    	int Xmin2 = 50;
-	int Xmax2 = 100;
-	int Ymin2 = 0;
-	int Ymax2 = 50;
+    	int Xmin2 = 0;
+	int Xmax2 = 65;
+	int Ymin2 = -65;
+	int Ymax2 = -1;
 	
 	//  ########### slave 3 ###########
     	int Xmin3 = 0;
-	int Xmax3 = 50;
-	int Ymin3 = 50;
-	int Ymax3 = 100;
+	int Xmax3 = 65;
+	int Ymin3 = 0;
+	int Ymax3 = 65;
 	
 	//  ########### slave 4 ###########
-    	int Xmin4 = 50;
-	int Xmax4 = 100;
-	int Ymin4 = 50;
-	int Ymax4 = 100;
+    	int Xmin4 = -65;
+	int Xmax4 = -1;
+	int Ymin4 = 0;
+	int Ymax4 = 65;
 	
 	
 	// ###### Inicialização da mensagem para o servo 1 ######

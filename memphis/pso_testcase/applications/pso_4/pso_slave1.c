@@ -17,7 +17,7 @@ int main (){
 	//Recebe parâmetros do mestre
 	Receive (&msg, pso_master);
 	Echo ("Mensagem recebida pelo escravo 1");
-	for (i = 0; i < 8; i++){
+	for (i = 0; i < MSG_SIZE; i++){
 		Echo (itoa (msg.msg[i]));
 	}
 
@@ -33,7 +33,7 @@ int main (){
 	int lim_inf[] = {XMin, YMin};
 	int lim_sup[] = {XMax, YMax};
 	
-	int maxite = 20;   //total de iterações
+	int maxite = 500;   //total de iterações
 	int maxrun = 1;     //total de vezes que o programa vai rodar
 	int run = 1;
 	int iteracao = 0;
@@ -119,16 +119,17 @@ int main (){
 		    	ffmin[iteracao][run] = fmin;
 		    	ffite[run] = iteracao;
 
-			Echo("iteracao: ");
-			Echo(itoa(iteracao));
-			Echo("Gbest: ");
-
             		if(fmin<fmin0){
+				Echo("iteracao: ");
+				Echo(itoa(iteracao));
+				Echo("Gbest: ");
                 		for(j=0;j<M;j++){
                     			gbest[j] = pbest[x_min][j];
                     			Echo(itoa(gbest[j]));
                 		}
-                	fmin0 = fmin;
+				Echo("Fitness: ");
+				Echo(itoa(fmin));
+                		fmin0 = fmin;
             		}
             
             		iteracao++;
@@ -156,8 +157,8 @@ void ofun(int x[][2], int of[], int N){
     int i;
 
     for(i=0;i<N;i++){
-        //Função objetivo
-        of[i] = 10*(x[i][0]-10)*(x[i][0]-10) + 20*(x[i][1]-20)*(x[i][1]-20);
+        //Função objetivo (1-x)^2 + 100(y-x^2)^2
+        of[i] = (1-x[i][0])*(1-x[i][0]) + 100*((x[i][1]-x[i][0]*x[i][0])*(x[i][1]-x[i][0]*x[i][0]));
     }
 }
 
