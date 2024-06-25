@@ -17,7 +17,8 @@ int main (){
     	int w = 1;
 	int c = 2;	   //constante positiva (c1 e c2)
 	int gbest[M];     //melhor global
-	int fmin;   	  //minimo guardado e minimo corrente
+	int fmin;   	  //minimo da função objetivo
+	int tfmin, tgbest[M]; //mínimo geral e gbest geral
 	int i;
     	
     	//  ########### slave 1 ###########
@@ -58,12 +59,9 @@ int main (){
 	for (i = 8; i < MSG_SIZE; i++){
 		msg.msg[i] = 0;
 	}
-	
-	Echo("Mensagem preparada para envio ao servo 1");
-	for (i = 0; i < 8; i++){
-		Echo(itoa(msg.msg[i]));
-	}
+	Echo(itoa(GetTick()));
 	Send (&msg, pso_slave1); // Envia parâmetros ao servo 1
+	Echo(itoa(GetTick()));
 	
 	
 	// ###### Inicialização da mensagem para o servo 2 ######
@@ -79,12 +77,9 @@ int main (){
 	for (i = 8; i < MSG_SIZE; i++){
 		msg.msg[i] = 0;
 	}
-	
-	Echo("Mensagem preparada para envio ao servo 2");
-	for (i = 0; i < 8; i++){
-		Echo(itoa(msg.msg[i]));
-	}
+	Echo(itoa(GetTick()));
 	Send (&msg, pso_slave2); // Envia parâmetros ao servo 2
+	Echo(itoa(GetTick()));
 	
 	// ###### Inicialização da mensagem para o servo 3 ######
 	msg.msg[0] = M;
@@ -99,13 +94,9 @@ int main (){
 	for (i = 8; i < MSG_SIZE; i++){
 		msg.msg[i] = 0;
 	}
-	
-	Echo("Mensagem preparada para envio ao servo 3");
-	for (i = 0; i < 8; i++){
-		Echo(itoa(msg.msg[i]));
-	}
+	Echo(itoa(GetTick()));
 	Send (&msg, pso_slave3); // Envia parâmetros ao servo 3
-	
+	Echo(itoa(GetTick()));	
 	
 	// ###### Inicialização da mensagem para o servo 4 ######
 	msg.msg[0] = M;
@@ -120,61 +111,43 @@ int main (){
 	for (i = 8; i < MSG_SIZE; i++){
 		msg.msg[i] = 0;
 	}
-	
-	Echo("Mensagem preparada para envio ao servo 4");
-	for (i = 0; i < 8; i++){
-		Echo(itoa(msg.msg[i]));
-	}
+	Echo(itoa(GetTick()));
 	Send (&msg, pso_slave4); // Envia parâmetros ao servo 4
-	
+	Echo(itoa(GetTick()));	
 	
 	// Recebe resultados do servo 1
 	Receive (&msg, pso_slave1); 
 	fmin = msg.msg[0];
 	gbest[0] = msg.msg[1];
 	gbest[1] = msg.msg[2];
-        
-        //imprimindo resultados
-        Echo("Resultados do servo 1");
-        Echo("Melhor resultado da funcao: ");
-        Echo(itoa(fmin));
-        Echo("Melhor solucao: ");
-        Echo("X1 = ");
-        Echo(itoa(gbest[0]));
-        Echo("X2 = ");
-        Echo(itoa(gbest[1])); 
+
+	tfmin = fmin;
+	tgbest[0] = gbest[0];
+	tgbest[1] = gbest[1];
         
         // Recebe resultados do escravo 2
 	Receive (&msg, pso_slave2); 
 	fmin = msg.msg[0];
 	gbest[0] = msg.msg[1];
 	gbest[1] = msg.msg[2];
-        
-        //imprimindo resultados
-        Echo("Resultados do servo 2");
-        Echo("Melhor resultado da funcao: ");
-        Echo(itoa(fmin));
-        Echo("Melhor solucao: ");
-        Echo("X1 = ");
-        Echo(itoa(gbest[0]));
-        Echo("X2 = ");
-        Echo(itoa(gbest[1])); 
-        
+
+	if(fmin < tfmin){
+		tfmin = fmin;
+		tgbest[0] = gbest[0];
+		tgbest[1] = gbest[1];
+        }
+
         // Recebe resultados do servo 3
 	Receive (&msg, pso_slave3); 
 	fmin = msg.msg[0];
 	gbest[0] = msg.msg[1];
 	gbest[1] = msg.msg[2];
         
-        //imprimindo resultados
-        Echo("Resultados do servo 3");
-        Echo("Melhor resultado da funcao: ");
-        Echo(itoa(fmin));
-        Echo("Melhor solucao: ");
-        Echo("X1 = ");
-        Echo(itoa(gbest[0]));
-        Echo("X2 = ");
-        Echo(itoa(gbest[1])); 
+	if(fmin < tfmin){
+		tfmin = fmin;
+		tgbest[0] = gbest[0];
+		tgbest[1] = gbest[1];
+        }
         
         // Recebe resultados do escravo 4
 	Receive (&msg, pso_slave4); 
@@ -182,16 +155,20 @@ int main (){
 	gbest[0] = msg.msg[1];
 	gbest[1] = msg.msg[2];
         
-        //imprimindo resultados
-        Echo("Resultados do servo 4");
-        Echo("Melhor resultado da funcao: ");
-        Echo(itoa(fmin));
+	if(fmin < tfmin){
+		tfmin = fmin;
+		tgbest[0] = gbest[0];
+		tgbest[1] = gbest[1];
+        }
+        
+	Echo("############################");
+	Echo("Melhor resultado da funcao: ");
+        Echo(itoa(tfmin));
         Echo("Melhor solucao: ");
         Echo("X1 = ");
-        Echo(itoa(gbest[0]));
+        Echo(itoa(tgbest[0]));
         Echo("X2 = ");
-        Echo(itoa(gbest[1])); 
-        
+        Echo(itoa(tgbest[1])); 
         
         Echo("Fim do PSO: ");
         Echo(itoa(GetTick()));
