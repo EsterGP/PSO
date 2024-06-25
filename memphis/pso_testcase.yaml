@@ -1,11 +1,11 @@
 hw:
-  page_size_KB:  64
+  page_size_KB: 32
   tasks_per_PE: 1
   model_description: sc
-  noc_buffer_size: 16
-  mpsoc_dimension: [4,4]
-  cluster_dimension: [4,4]
+  noc_buffer_size: 8
+  mpsoc_dimension: [3,3]
+  cluster_dimension: [3,3]
   Peripherals:
     - name: APP_INJECTOR
       pe: 1,2
-      port: N
+      port: N 
