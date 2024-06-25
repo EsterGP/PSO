@@ -1,5 +1,10 @@
 apps:
-  - name: rosenbrock_serial
-  - name: pso_4
+  - name: pso
     cluster: 0
-    start_time_ms: 0
+    start_time_ms: 15
+    static_mapping:
+      pso_master: [1,1]
+      pso_slave1: [0,1]
+      pso_slave2: [1,2]
+      pso_slave3: [2,1]
+      pso_slave4: [1,0]
