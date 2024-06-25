@@ -12,14 +12,10 @@ int main (){
 	
 	msg.length = MSG_SIZE;
 	
-	int N, M, XMin, XMax, YMin, YMax, w, c, i;
+	int N, M, XMin, XMax, YMin, YMax, w, c, i, j;
 
 	//Recebe parâmetros do mestre
 	Receive (&msg, pso_master);
-	Echo ("Mensagem recebida pelo escravo 2");
-	for (i = 0; i < MSG_SIZE; i++){
-		Echo (itoa (msg.msg[i]));
-	}
 
 	M = msg.msg[0];
 	N = msg.msg[1];
@@ -33,12 +29,8 @@ int main (){
 	int lim_inf[] = {XMin, YMin};
 	int lim_sup[] = {XMax, YMax};
 	
-	int maxite = 500;   //total de iterações
+	int maxite = 1000;   //total de iterações
 	int maxrun = 1;     //total de vezes que o programa vai rodar
-
-	//int i = 0; linha 15
-	int j = 0;
-	//int k = 0;
 	int run = 1;
 	int iteracao = 0;
 
@@ -85,7 +77,7 @@ int main (){
 
 		iteracao = 1;
 
-		while(iteracao<=maxite){            
+		while(iteracao<=maxite){
 			//atualizando as velocidades
 			for(i=0;i<N;i++){
 				for(j=0;j<M;j++){
