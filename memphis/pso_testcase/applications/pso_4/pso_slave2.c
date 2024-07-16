@@ -33,7 +33,7 @@ int main (){
 	int lim_inf[] = {XMin, YMin};
 	int lim_sup[] = {XMax, YMax};
 	
-	int maxite = 20;   //total de iterações
+	int maxite = 100;   //total de iterações
 	int maxrun = 1;     //total de vezes que o programa vai rodar
 
 	//int i = 0; linha 15
@@ -123,17 +123,20 @@ int main (){
 		    	ffmin[iteracao][run] = fmin;
 		    	ffite[run] = iteracao;
 
-			Echo("iteracao: ");
-			Echo(itoa(iteracao));
-			Echo("Gbest: ");
-
-            		if(fmin<fmin0){
+			if(fmin<fmin0){
+				Echo("iteracao: ");
+				Echo(itoa(iteracao));
+				Echo("Gbest: ");
                 		for(j=0;j<M;j++){
                     			gbest[j] = pbest[x_min][j];
                     			Echo(itoa(gbest[j]));
                 		}
-                	fmin0 = fmin;
-            		}
+                		fmin0 = fmin;
+            		} else if (iteracao%10 == 0) {
+				Echo("iteracao: ");
+				Echo(itoa(iteracao));
+			}
+            
             
             		iteracao++;
             		
