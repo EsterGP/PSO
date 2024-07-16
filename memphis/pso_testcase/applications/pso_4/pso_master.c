@@ -12,39 +12,38 @@ int main (){
 	
 	//para o paralelismo
 	int M = 2; //numero de variaveis na função objetivo
-    	int N = 150; //tamanho da população para cada servo
+    	int N = 100; //tamanho da população para cada servo
     	
     	int w = 1;
 	int c = 2;	   //constante positiva (c1 e c2)
 	int gbest[M];     //melhor global
-	int fmin;   	  //minimo da função objetivo
+	int fmin;   	  //minimo guardado e minimo corrente
 	int tfmin, tgbest[M]; //mínimo geral e gbest geral
 	int i;
     	
     	//  ########### slave 1 ###########
-    	int Xmin1 = -65;
-	int Xmax1 = -1;
-	int Ymin1 = -65;
-	int Ymax1 = -1;
+    	int Xmin1 = 0;
+	int Xmax1 = 50;
+	int Ymin1 = 0;
+	int Ymax1 = 50;
 	
 	//  ########### slave 2 ###########
-    	int Xmin2 = 0;
-	int Xmax2 = 65;
-	int Ymin2 = -65;
-	int Ymax2 = -1;
+    	int Xmin2 = 50;
+	int Xmax2 = 100;
+	int Ymin2 = 0;
+	int Ymax2 = 50;
 	
 	//  ########### slave 3 ###########
-    	int Xmin3 = 0;
-	int Xmax3 = 65;
+    	int Xmin3 = 50;
+	int Xmax3 = 100;
 	int Ymin3 = 0;
-	int Ymax3 = 65;
+	int Ymax3 = 50;
 	
 	//  ########### slave 4 ###########
-    	int Xmin4 = -65;
-	int Xmax4 = -1;
-	int Ymin4 = 0;
-	int Ymax4 = 65;
-	
+    	int Xmin4 = 50;
+	int Xmax4 = 100;
+	int Ymin4 = 50;
+	int Ymax4 = 100;
 	
 	// ###### Inicialização da mensagem para o servo 1 ######
 	msg.msg[0] = M;
@@ -58,6 +57,11 @@ int main (){
 
 	for (i = 8; i < MSG_SIZE; i++){
 		msg.msg[i] = 0;
+	}
+	
+	Echo("Mensagem preparada para envio ao servo 1");
+	for (i = 0; i < 8; i++){
+		Echo(itoa(msg.msg[i]));
 	}
 	Echo(itoa(GetTick()));
 	Send (&msg, pso_slave1); // Envia parâmetros ao servo 1
@@ -77,6 +81,11 @@ int main (){
 	for (i = 8; i < MSG_SIZE; i++){
 		msg.msg[i] = 0;
 	}
+	
+	Echo("Mensagem preparada para envio ao servo 2");
+	for (i = 0; i < 8; i++){
+		Echo(itoa(msg.msg[i]));
+	}
 	Echo(itoa(GetTick()));
 	Send (&msg, pso_slave2); // Envia parâmetros ao servo 2
 	Echo(itoa(GetTick()));
@@ -94,9 +103,15 @@ int main (){
 	for (i = 8; i < MSG_SIZE; i++){
 		msg.msg[i] = 0;
 	}
+	
+	Echo("Mensagem preparada para envio ao servo 3");
+	for (i = 0; i < 8; i++){
+		Echo(itoa(msg.msg[i]));
+	}
 	Echo(itoa(GetTick()));
 	Send (&msg, pso_slave3); // Envia parâmetros ao servo 3
-	Echo(itoa(GetTick()));	
+	Echo(itoa(GetTick()));
+	
 	
 	// ###### Inicialização da mensagem para o servo 4 ######
 	msg.msg[0] = M;
@@ -111,10 +126,15 @@ int main (){
 	for (i = 8; i < MSG_SIZE; i++){
 		msg.msg[i] = 0;
 	}
+	
+	Echo("Mensagem preparada para envio ao servo 4");
+	for (i = 0; i < 8; i++){
+		Echo(itoa(msg.msg[i]));
+	}
 	Echo(itoa(GetTick()));
 	Send (&msg, pso_slave4); // Envia parâmetros ao servo 4
-	Echo(itoa(GetTick()));	
-	
+	Echo(itoa(GetTick()));
+
 	// Recebe resultados do servo 1
 	Receive (&msg, pso_slave1); 
 	fmin = msg.msg[0];
@@ -136,7 +156,7 @@ int main (){
 		tgbest[0] = gbest[0];
 		tgbest[1] = gbest[1];
         }
-
+        
         // Recebe resultados do servo 3
 	Receive (&msg, pso_slave3); 
 	fmin = msg.msg[0];
@@ -154,14 +174,15 @@ int main (){
 	fmin = msg.msg[0];
 	gbest[0] = msg.msg[1];
 	gbest[1] = msg.msg[2];
-        
+
 	if(fmin < tfmin){
 		tfmin = fmin;
 		tgbest[0] = gbest[0];
 		tgbest[1] = gbest[1];
         }
         
-	Echo("############################");
+        //imprimindo resultados
+        Echo("############################");
 	Echo("Melhor resultado da funcao: ");
         Echo(itoa(tfmin));
         Echo("Melhor solucao: ");
