@@ -12,12 +12,12 @@ int main (){
 	
 	msg.length = MSG_SIZE;
 	
-	int N, M, XMin, XMax, YMin, YMax, w, c, i;
+	int N, M, XMin, XMax, YMin, YMax, w, c,  maxite, maxrun, i, j;
 
 	//Recebe parâmetros do mestre
 	Receive (&msg, pso_master);
 	Echo ("Mensagem recebida pelo escravo 2");
-	for (i = 0; i < 8; i++){
+	for (i = 0; i < 10; i++){
 		Echo (itoa (msg.msg[i]));
 	}
 
@@ -29,16 +29,12 @@ int main (){
 	YMax = msg.msg[5];
 	w = msg.msg[6];
 	c = msg.msg[7];
+	maxite = msg.msg[8];
+	maxrun = msg.msg[9];
 	
 	int lim_inf[] = {XMin, YMin};
 	int lim_sup[] = {XMax, YMax};
-	
-	int maxite = 100;   //total de iterações
-	int maxrun = 1;     //total de vezes que o programa vai rodar
 
-	//int i = 0; linha 15
-	int j = 0;
-	//int k = 0;
 	int run = 1;
 	int iteracao = 0;
 
