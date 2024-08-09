@@ -16,7 +16,7 @@ int main (){
 	
 	//para o paralelismo
 	int M = 2; //numero de variaveis na função objetivo
-    	int N = 150; //tamanho da população para cada servo
+    	int N = 50; //tamanho da população para cada servo
     	
     	int w = 1;
 	int c = 2;	   //constante positiva (c1 e c2)
@@ -26,7 +26,7 @@ int main (){
     	int lim_inf = -65;
 	int lim_sup = 65;
 	
-	int maxite = 1000;   //total de iterações
+	int maxite = 100;   //total de iterações
 	int maxrun = 1;     //total de vezes que o programa vai rodar
 	int run = 1;
 	int iteracao = 0;
