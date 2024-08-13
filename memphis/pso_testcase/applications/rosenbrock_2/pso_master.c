@@ -12,7 +12,11 @@ int main (){
 	
 	//para o paralelismo
 	int M = 2; //numero de variaveis na função objetivo
-    	int N = 150; //tamanho da população para cada servo
+    	int N = 100; //tamanho da população para cada servo
+	int sec = 2; //total de EP secundários
+
+	int maxite = 400;   //total de iterações para cada EP secundário
+	int maxrun = 1;     //total de vezes que o programa vai rodar em cada EP secundário
     	
     	int w = 1;
 	int c = 2;	   //constante positiva (c1 e c2)
@@ -35,16 +39,23 @@ int main (){
 	
 	// ###### Inicialização da mensagem para o servo 1 ######
 	msg.msg[0] = M;
-	msg.msg[1] = N;
+	msg.msg[1] = N/sec;
 	msg.msg[2] = Xmin1;
 	msg.msg[3] = Xmax1;
 	msg.msg[4] = Ymin1;
 	msg.msg[5] = Ymax1;
 	msg.msg[6] = w;
 	msg.msg[7] = c;
+	msg.msg[8] = maxite;
+	msg.msg[9] = maxrun;
 
-	for (i = 8; i < MSG_SIZE; i++){
+	for (i = 10; i < MSG_SIZE; i++){
 		msg.msg[i] = 0;
+	}
+	
+	Echo("Mensagem preparada para envio ao servo 1");
+	for (i = 0; i < 10; i++){
+		Echo(itoa(msg.msg[i]));
 	}
 	Echo(itoa(GetTick()));
 	Send (&msg, pso_slave1); // Envia parâmetros ao servo 1
@@ -53,16 +64,23 @@ int main (){
 	
 	// ###### Inicialização da mensagem para o servo 2 ######
 	msg.msg[0] = M;
-	msg.msg[1] = N;
+	msg.msg[1] = N/sec;
 	msg.msg[2] = Xmin2;
 	msg.msg[3] = Xmax2;
 	msg.msg[4] = Ymin2;
 	msg.msg[5] = Ymax2;
 	msg.msg[6] = w;
 	msg.msg[7] = c;
+	msg.msg[8] = maxite;
+	msg.msg[9] = maxrun;
 
-	for (i = 8; i < MSG_SIZE; i++){
+	for (i = 10; i < MSG_SIZE; i++){
 		msg.msg[i] = 0;
+	}
+	
+	Echo("Mensagem preparada para envio ao servo 2");
+	for (i = 0; i < 10; i++){
+		Echo(itoa(msg.msg[i]));
 	}
 	Echo(itoa(GetTick()));
 	Send (&msg, pso_slave2); // Envia parâmetros ao servo 2
