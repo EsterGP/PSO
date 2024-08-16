@@ -25,6 +25,9 @@ int main (){
 	int tfmin, tgbest[M]; //mínimo geral e gbest geral
 	int i;
     	
+	Echo("Preparando parametros: ");
+	Echo(itoa(GetTick()));
+
     	//  ########### slave 1 ###########
     	int Xmin1 = -65;
 	int Xmax1 = -1;
@@ -60,9 +63,10 @@ int main (){
 	}
 	
 	Echo("Mensagem preparada para envio ao servo 1");
-	for (i = 0; i < 10; i++){
+	/*for (i = 0; i < 10; i++){
 		Echo(itoa(msg.msg[i]));
-	}
+	}*/
+	
 	Echo(itoa(GetTick()));
 	Send (&msg, pso_slave1); // Envia parâmetros ao servo 1
 	Echo(itoa(GetTick()));
@@ -85,9 +89,10 @@ int main (){
 	}
 	
 	Echo("Mensagem preparada para envio ao servo 2");
-	for (i = 0; i < 10; i++){
+	/*for (i = 0; i < 10; i++){
 		Echo(itoa(msg.msg[i]));
-	}
+	}*/
+
 	Echo(itoa(GetTick()));
 	Send (&msg, pso_slave2); // Envia parâmetros ao servo 2
 	Echo(itoa(GetTick()));
@@ -109,9 +114,10 @@ int main (){
 	}
 	
 	Echo("Mensagem preparada para envio ao servo 3");
-	for (i = 0; i < 10; i++){
+	/*for (i = 0; i < 10; i++){
 		Echo(itoa(msg.msg[i]));
-	}
+	}*/
+
 	Echo(itoa(GetTick()));
 	Send (&msg, pso_slave3); // Envia parâmetros ao servo 3
 	Echo(itoa(GetTick()));
