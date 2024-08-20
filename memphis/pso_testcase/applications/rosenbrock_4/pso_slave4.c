@@ -12,10 +12,11 @@ int main (){
 	
 	msg.length = MSG_SIZE;
 	
-	int N, M, XMin, XMax, YMin, YMax, w, c, i, j;
+	int N, M, XMin, XMax, YMin, YMax, w, c, maxite, maxrun, i, j;
 
 	//Recebe parâmetros do mestre
 	Receive (&msg, pso_master);
+	Echo ("Mensagem recebida pelo escravo 3");
 
 	M = msg.msg[0];
 	N = msg.msg[1];
@@ -25,12 +26,12 @@ int main (){
 	YMax = msg.msg[5];
 	w = msg.msg[6];
 	c = msg.msg[7];
+	maxite = msg.msg[8];
+	maxrun = msg.msg[9];
 	
 	int lim_inf[] = {XMin, YMin};
 	int lim_sup[] = {XMax, YMax};
-	
-	int maxite = 1000;   //total de iterações
-	int maxrun = 1;     //total de vezes que o programa vai rodar
+
 	int run = 1;
 	int iteracao = 0;
 
@@ -77,7 +78,7 @@ int main (){
 
 		iteracao = 1;
 
-		while((iteracao<=maxite) && (i < x_min+200)){
+		while(iteracao<=maxite){
 			//atualizando as velocidades
 			for(i=0;i<N;i++){
 				for(j=0;j<M;j++){
@@ -146,7 +147,10 @@ int main (){
 	msg.msg[0] = fmin;
 	msg.msg[1] = gbest[0];
 	msg.msg[2] = gbest[1];
+	
+	Echo(itoa(GetTick()));
 	Send (&msg, pso_master);
+	Echo(itoa(GetTick()));
 }
 
 void ofun(int x[][2], int of[], int N){
