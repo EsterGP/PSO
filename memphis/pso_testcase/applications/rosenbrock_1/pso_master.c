@@ -12,7 +12,7 @@ int main (){
 	
 	//para o paralelismo
 	int M = 2; //numero de variaveis na função objetivo
-    	int N = 100; //tamanho da população para cada servo
+    	int N = 250; //tamanho da população para cada servo
 	int sec = 1; //total de EP secundários
 
 	int maxite = 400;   //total de iterações para cada EP secundário
@@ -25,6 +25,7 @@ int main (){
 	int tfmin, tgbest[M]; //mínimo geral e gbest geral
 	int i;
     	
+	Echo(itoa(GetTick()));
     	//  ########### slave 1 ###########
     	int Xmin1 = -65;
 	int Xmax1 = 65;
@@ -48,9 +49,9 @@ int main (){
 	}
 	
 	Echo("Mensagem preparada para envio ao servo 1");
-	for (i = 0; i < 10; i++){
+	/*for (i = 0; i < 10; i++){
 		Echo(itoa(msg.msg[i]));
-	}
+	}*/
 	Echo(itoa(GetTick()));
 	Send (&msg, pso_slave1); // Envia parâmetros ao servo 1
 	Echo(itoa(GetTick()));

@@ -143,11 +143,14 @@ int main (){
     	Echo(itoa(GetTick()));
     	
     	//Enviando os resultados para o mestre
-
+	
 	msg.msg[0] = fmin;
 	msg.msg[1] = gbest[0];
 	msg.msg[2] = gbest[1];
+
+	Echo(itoa(GetTick()));
 	Send (&msg, pso_master);
+	Echo(itoa(GetTick()));
 }
 
 void ofun(int x[][2], int of[], int N){
